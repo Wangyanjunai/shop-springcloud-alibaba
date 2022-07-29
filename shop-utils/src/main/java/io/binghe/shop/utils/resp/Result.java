@@ -1,4 +1,4 @@
-package io.binghe.shop.util.resp;
+package io.binghe.shop.utils.resp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +17,7 @@ import java.io.Serializable;
 public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = 1497405107265595284L;
+
     /**
      * 状态码
      */
@@ -31,5 +32,4 @@ public class Result<T> implements Serializable {
      * 返回的数据
      */
     private T data;
-
 }

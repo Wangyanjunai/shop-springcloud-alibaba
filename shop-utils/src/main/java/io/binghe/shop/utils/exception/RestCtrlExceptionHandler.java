@@ -1,12 +1,17 @@
-package io.binghe.shop.util.exception;
+package io.binghe.shop.utils.exception;
 
-import io.binghe.shop.util.constants.HttpCode;
-import io.binghe.shop.util.resp.Result;
+import io.binghe.shop.utils.constants.HttpCode;
+import io.binghe.shop.utils.resp.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * @author binghe
+ * @version 1.0.0
+ * @description 全局异常处理器
+ */
 @RestControllerAdvice
 public class RestCtrlExceptionHandler {
     private final Logger logger = LoggerFactory.getLogger(RestCtrlExceptionHandler.class);

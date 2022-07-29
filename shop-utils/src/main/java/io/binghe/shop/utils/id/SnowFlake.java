@@ -1,4 +1,4 @@
-package io.binghe.shop.util.id;
+package io.binghe.shop.utils.id;
 
 public class SnowFlake {
 
