@@ -8,7 +8,7 @@ package io.binghe.shop.utils.constants;
 public class HttpCode {
 
     /**
-     * 成功状态码
+     * 成功的状态码
      */
     public static final int SUCCESS = 200;
 
