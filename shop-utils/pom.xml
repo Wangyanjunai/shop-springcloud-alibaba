@@ -12,6 +12,7 @@
 
     <groupId>io.binghe.shop.util</groupId>
     <artifactId>shop-utils</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>shop-utils-children</name>
     <description>各服务都会使用的工具类模块。</description>
