@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan(value = { "io.binghe.shop.product.mapper" })
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableDiscoveryClient
-public class ProductStater {
+public class ProductStarter {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProductStater.class, args);
+        SpringApplication.run(ProductStarter.class, args);
     }
 
 }
