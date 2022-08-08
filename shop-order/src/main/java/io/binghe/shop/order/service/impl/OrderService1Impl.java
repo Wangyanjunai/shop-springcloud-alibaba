@@ -26,10 +26,9 @@ import java.math.BigDecimal;
  * @version 1.0.0
  * @description 订单业务接口实现
  */
-@Primary
-@Service("orderServiceImpl")
+@Service("orderService1Impl")
 @Slf4j
-public class OrderServiceImpl implements OrderService {
+public class OrderService1Impl implements OrderService {
 
     private OrderMapper orderMapper;
 
