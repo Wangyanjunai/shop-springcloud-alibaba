@@ -6,14 +6,13 @@ import io.binghe.shop.bean.OrderItem;
 import io.binghe.shop.bean.Product;
 import io.binghe.shop.bean.User;
 import io.binghe.shop.dto.OrderParams;
-import io.binghe.shop.order.mapper.OrderItemMapper;
 import io.binghe.shop.order.mapper.OrderMapper;
+import io.binghe.shop.order.mapper.OrderItemMapper;
 import io.binghe.shop.order.service.OrderService;
 import io.binghe.shop.utils.constants.HttpCode;
 import io.binghe.shop.utils.resp.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
@@ -27,9 +26,9 @@ import java.math.BigDecimal;
  * @version 1.0.0
  * @description 订单业务接口实现
  */
-@Service("orderService2Impl")
+@Service("orderServiceV2")
 @Slf4j
-public class OrderService2Impl implements OrderService {
+public class OrderServiceV2Impl implements OrderService {
 
     private OrderMapper orderMapper;
 
@@ -60,12 +59,8 @@ public class OrderService2Impl implements OrderService {
         this.discoveryClient = discoveryClient;
     }
 
-    private String userServer = "server-user";
-
-    private String productServer = "server-product";
-
     private String getServiceUrl(String serviceName) {
-        ServiceInstance serviceInstance = discoveryClient.getInstances(serviceName).get(0);
+        ServiceInstance serviceInstance = this.discoveryClient.getInstances(serviceName).get(0);
         return serviceInstance.getHost() + ":" + serviceInstance.getPort();
     }
 
@@ -81,16 +76,18 @@ public class OrderService2Impl implements OrderService {
             throw new RuntimeException("参数异常: " + JSONObject.toJSONString(orderParams));
         }
 
+        String userServer = "server-user";
         String userUrl = this.getServiceUrl(userServer);
 
+        String productServer = "server-product";
         String productUrl = this.getServiceUrl(productServer);
 
-        User user = restTemplate.getForObject("http://" + userUrl + "/user/get/" + orderParams.getUserId(), User.class);
+        User user = this.restTemplate.getForObject("http://" + userUrl + "/user/get/" + orderParams.getUserId(), User.class);
         if (user == null) {
             throw new RuntimeException("未获取到用户信息: " + JSONObject.toJSONString(orderParams));
         }
 
-        Product product = restTemplate.getForObject("http://" + productUrl + "/product/get/" + orderParams.getProductId(), Product.class);
+        Product product = this.restTemplate.getForObject("http://" + productUrl + "/product/get/" + orderParams.getProductId(), Product.class);
         if (product == null) {
             throw new RuntimeException("未获取到商品信息: " + JSONObject.toJSONString(orderParams));
         }
@@ -104,7 +101,7 @@ public class OrderService2Impl implements OrderService {
         order.setUserId(user.getId());
         order.setUsername(user.getUsername());
         order.setTotalPrice(product.getProPrice().multiply(BigDecimal.valueOf(orderParams.getCount())));
-        orderMapper.insert(order);
+        this.orderMapper.insert(order);
 
         OrderItem orderItem = new OrderItem();
         orderItem.setNumber(orderParams.getCount());
@@ -112,9 +109,9 @@ public class OrderService2Impl implements OrderService {
         orderItem.setProId(product.getId());
         orderItem.setProName(product.getProName());
         orderItem.setProPrice(product.getProPrice());
-        orderItemMapper.insert(orderItem);
+        this.orderItemMapper.insert(orderItem);
 
-        Result<Integer> result = restTemplate.getForObject("http://" + productUrl + "/product/update_count/" + orderParams.getProductId() + "/" + orderParams.getCount(), Result.class);
+        Result<Integer> result = this.restTemplate.getForObject("http://" + productUrl + "/product/update_count/" + orderParams.getProductId() + "/" + orderParams.getCount(), Result.class);
         if (result.getCode() != HttpCode.SUCCESS) {
             throw new RuntimeException("库存扣减失败");
         }

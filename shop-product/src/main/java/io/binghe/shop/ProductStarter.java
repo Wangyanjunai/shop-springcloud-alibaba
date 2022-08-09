@@ -1,4 +1,4 @@
-package io.binghe.shop.product;
+package io.binghe.shop;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

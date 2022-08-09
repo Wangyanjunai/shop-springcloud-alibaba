@@ -1,10 +1,10 @@
-package io.binghe.shop.order;
+package io.binghe.shop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OrderStarterTests {
+class ProductStarter {
 
     @Test
     void contextLoads() {
