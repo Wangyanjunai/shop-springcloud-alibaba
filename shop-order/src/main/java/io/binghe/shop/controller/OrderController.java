@@ -1,8 +1,9 @@
-package io.binghe.shop.order.controller;
+package io.binghe.shop.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import io.binghe.shop.dto.OrderParams;
 import io.binghe.shop.order.service.OrderService;
+import io.binghe.shop.order.service.SentinelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,78 +13,100 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 public class OrderController {
-    private OrderService orderService;
+    private OrderService orderServiceV1;
 
-    private OrderService orderService2;
+    private OrderService orderServiceV2;
 
-    private OrderService orderService3;
+    private OrderService orderServiceV3;
 
-    private OrderService orderService4;
+    private OrderService orderServiceV4;
 
-    private OrderService orderService5;
+    private OrderService orderServiceV5;
+
+    private OrderService orderServiceV6;
+
+    private SentinelService sentinelService;
 
     @Autowired
     @Qualifier(value = "orderServiceV1")
-    public void setOrderService(OrderService orderService) {
-        this.orderService = orderService;
+    public void setOrderServiceV1(OrderService orderServiceV1) {
+        this.orderServiceV1 = orderServiceV1;
     }
 
     @Autowired
     @Qualifier(value = "orderServiceV2")
-    public void setOrderService2(OrderService orderService2) {
-        this.orderService2 = orderService2;
+    public void setOrderServiceV2(OrderService orderServiceV2) {
+        this.orderServiceV2 = orderServiceV2;
     }
 
     @Autowired
     @Qualifier(value = "orderServiceV3")
-    public void setOrderService3(OrderService orderService3) {
-        this.orderService3 = orderService3;
+    public void setOrderServiceV3(OrderService orderServiceV3) {
+        this.orderServiceV3 = orderServiceV3;
     }
 
     @Autowired
     @Qualifier(value = "orderServiceV4")
-    public void setOrderService4(OrderService orderService4) {
-        this.orderService4 = orderService4;
+    public void setOrderServiceV4(OrderService orderServiceV4) {
+        this.orderServiceV4 = orderServiceV4;
     }
 
     @Autowired
     @Qualifier("orderServiceV5")
-    public void setOrderService5(OrderService orderService5) {
-        this.orderService5 = orderService5;
+    public void setOrderServiceV5(OrderService orderServiceV5) {
+        this.orderServiceV5 = orderServiceV5;
     }
 
-    @GetMapping(value = "/submit_order")
-    public String submitOrder(OrderParams orderParams) {
+    @Autowired
+    @Qualifier("orderServiceV6")
+    public void setOrderServiceV6(OrderService orderServiceV6) {
+        this.orderServiceV6 = orderServiceV6;
+    }
+
+    @Autowired
+    public void setSentinelService(SentinelService sentinelService) {
+        this.sentinelService = sentinelService;
+    }
+
+    @GetMapping(value = "/submit_order1")
+    public String submitOrder1(OrderParams orderParams) {
         log.info("提交订单时传递的参数:{}", JSONObject.toJSONString(orderParams));
-        this.orderService.saveOrder(orderParams);
+        this.orderServiceV1.saveOrder(orderParams);
         return "success";
     }
 
     @GetMapping(value = "/submit_order2")
     public String submitOrder2(OrderParams orderParams) {
         log.info("提交订单时传递的参数:{}", JSONObject.toJSONString(orderParams));
-        this.orderService2.saveOrder(orderParams);
+        this.orderServiceV2.saveOrder(orderParams);
         return "success";
     }
 
     @GetMapping(value = "/submit_order3")
     public String submitOrder3(OrderParams orderParams) {
         log.info("提交订单时传递的参数:{}", JSONObject.toJSONString(orderParams));
-        this.orderService3.saveOrder(orderParams);
+        this.orderServiceV3.saveOrder(orderParams);
         return "success";
     }
 
     @GetMapping(value = "/submit_order4")
     public String submitOrder4(OrderParams orderParams) {
         log.info("提交订单时传递的参数:{}", JSONObject.toJSONString(orderParams));
-        this.orderService4.saveOrder(orderParams);
+        this.orderServiceV4.saveOrder(orderParams);
         return "success";
     }
 
     @GetMapping(value = "/submit_order5")
     public String submitOrder5(OrderParams orderParams) {
         log.info("提交订单时传递的参数:{}", JSONObject.toJSONString(orderParams));
-        this.orderService5.saveOrder(orderParams);
+        this.orderServiceV5.saveOrder(orderParams);
+        return "success";
+    }
+
+    @GetMapping(value = "/submit_order6")
+    public String submitOrder6(OrderParams orderParams) {
+        log.info("提交订单时传递的参数:{}", JSONObject.toJSONString(orderParams));
+        this.orderServiceV6.saveOrder(orderParams);
         return "success";
     }
 
@@ -96,7 +119,16 @@ public class OrderController {
     @GetMapping(value = "/test_sentinel")
     public String testSentinel() {
         log.info("测试Sentinel");
+        this.sentinelService.sendMessage();
         return "sentinel";
     }
+
+    @GetMapping(value = "/test_sentinel2")
+    public String testSentinel2() {
+        log.info("测试Sentinel2");
+        this.sentinelService.sendMessage();
+        return "sentinel2";
+    }
+
 
 }

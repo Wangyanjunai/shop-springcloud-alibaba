@@ -35,7 +35,7 @@ public class ProductServiceFallBack implements ProductService {
     public Result<Integer> updateCount(Long pid, Integer count) {
         Result<Integer> result = new Result<>();
         result.setCode(1001);
-        result.setCodeMsg("触发了容错逻辑");
+        result.setCodeMsg("触发了容错逻辑。");
         return result;
     }
 }

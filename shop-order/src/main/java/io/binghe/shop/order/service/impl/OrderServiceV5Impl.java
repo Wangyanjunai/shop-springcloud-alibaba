@@ -101,7 +101,7 @@ public class OrderServiceV5Impl implements OrderService {
 
         Result<Integer> result = this.productService.updateCount(orderParams.getProductId(), orderParams.getCount());
         if (result.getCode() != HttpCode.SUCCESS) {
-            throw new RuntimeException("库存扣减失败");
+            throw new RuntimeException("库存扣减失败。");
         }
         log.info("库存扣减成功");
     }

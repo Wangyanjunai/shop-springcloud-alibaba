@@ -100,7 +100,7 @@ public class OrderServiceV4Impl implements OrderService {
 
         Result<Integer> result = this.restTemplate.getForObject("http://" + productServer + "/product/update_count/" + orderParams.getProductId() + "/" + orderParams.getCount(), Result.class);
         if (result.getCode() != HttpCode.SUCCESS) {
-            throw new RuntimeException("库存扣减失败");
+            throw new RuntimeException("库存扣减失败。");
         }
         log.info("库存扣减成功");
     }

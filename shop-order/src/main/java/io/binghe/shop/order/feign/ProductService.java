@@ -1,7 +1,8 @@
 package io.binghe.shop.order.feign;
 
 import io.binghe.shop.bean.Product;
-import io.binghe.shop.order.feign.fallback.ProductServiceFallBack;
+//import io.binghe.shop.order.feign.fallback.ProductServiceFallBack;
+import io.binghe.shop.order.feign.fallback.factory.ProductServiceFallBackFactory;
 import io.binghe.shop.utils.resp.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @version 1.0.0
  * @description 调用商品微服务的接口
  */
-@FeignClient(value = "server-product", fallback = ProductServiceFallBack.class)
+//@FeignClient(value = "server-product", fallback = ProductServiceFallBack.class)
+@FeignClient(value = "server-product", fallbackFactory = ProductServiceFallBackFactory.class)
 public interface ProductService {
 
     /**
