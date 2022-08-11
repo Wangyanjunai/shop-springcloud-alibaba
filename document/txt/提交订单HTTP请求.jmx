@@ -34,7 +34,7 @@
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-          <stringProp name="HTTPSampler.path">/order/submit_order5?userId=1001&amp;productId=1003&amp;count=1</stringProp>
+          <stringProp name="HTTPSampler.path">/order/submit_order6?userId=1001&amp;productId=1003&amp;count=1</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>

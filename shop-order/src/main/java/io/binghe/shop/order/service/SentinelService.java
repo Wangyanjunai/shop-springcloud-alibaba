@@ -11,4 +11,9 @@ public interface SentinelService {
      * 测试方法
      */
     void sendMessage();
+
+    /**
+     * 测试方法2
+     */
+    String sendMessage2();
 }

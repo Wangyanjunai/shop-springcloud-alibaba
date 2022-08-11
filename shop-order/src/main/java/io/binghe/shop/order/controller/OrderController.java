@@ -1,4 +1,4 @@
-package io.binghe.shop.controller;
+package io.binghe.shop.order.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import io.binghe.shop.dto.OrderParams;
