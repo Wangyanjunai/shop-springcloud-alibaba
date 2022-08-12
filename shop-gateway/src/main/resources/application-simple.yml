@@ -20,7 +20,6 @@ spring:
             - Path=/server-user/**
           filters:
             - StripPrefix=1
-
         - id: product-gateway
           uri: http://localhost:8070
           order: 1
@@ -28,7 +27,6 @@ spring:
             - Path=/server-product/**
           filters:
             - StripPrefix=1
-
         - id: order-gateway
           uri: http://localhost:8080
           order: 1

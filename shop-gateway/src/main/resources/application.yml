@@ -4,9 +4,6 @@ spring:
   application:
     name: server-gateway
   cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
     gateway:
       globalcors:
         cors-configurations:
@@ -15,6 +12,27 @@ spring:
             allowedMethods: "*"
             allowCredentials: true
             allowedHeaders: "*"
-      discovery:
-        locator:
-          enabled: true
+      routes:
+        - id: user-gateway
+          uri: http://localhost:8060
+          order: 1
+          predicates:
+            - Path=/server-user/**
+            - RemoteAddr=192.168.31.1/24
+            - Method=GET
+          filters:
+            - StripPrefix=1
+        - id: product-gateway
+          uri: http://localhost:8070
+          order: 1
+          predicates:
+            - Path=/server-product/**
+          filters:
+            - StripPrefix=1
+        - id: order-gateway
+          uri: http://localhost:8080
+          order: 1
+          predicates:
+            - Path=/server-order/**
+          filters:
+            - StripPrefix=1

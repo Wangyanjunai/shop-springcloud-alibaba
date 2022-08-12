@@ -1,0 +1,29 @@
+server:
+  port: 10001
+spring:
+  application:
+    name: server-gateway
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        port: 7777
+        dashboard: 127.0.0.1:8888
+      web-context-unify: false
+      eager: true
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowCredentials: true
+            allowedHeaders: "*"
+      discovery:
+        locator:
+          enabled: true
+          route-id-prefix: gateway-
