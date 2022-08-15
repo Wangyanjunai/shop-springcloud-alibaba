@@ -3,7 +3,18 @@ server:
 spring:
   application:
     name: server-gateway
+  main:
+    allow-bean-definition-overriding: true
   cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        port: 7777
+        dashboard: 127.0.0.1:8888
+      web-context-unify: false
+      eager: true
     gateway:
       globalcors:
         cors-configurations:
@@ -12,27 +23,7 @@ spring:
             allowedMethods: "*"
             allowCredentials: true
             allowedHeaders: "*"
-      routes:
-        - id: user-gateway
-          uri: http://localhost:8060
-          order: 1
-          predicates:
-            - Path=/server-user/**
-            - RemoteAddr=192.168.31.1/24
-            - Method=GET
-          filters:
-            - StripPrefix=1
-        - id: product-gateway
-          uri: http://localhost:8070
-          order: 1
-          predicates:
-            - Path=/server-product/**
-          filters:
-            - StripPrefix=1
-        - id: order-gateway
-          uri: http://localhost:8080
-          order: 1
-          predicates:
-            - Path=/server-order/**
-          filters:
-            - StripPrefix=1
+      discovery:
+        locator:
+          enabled: true
+          route-id-prefix: gateway-
