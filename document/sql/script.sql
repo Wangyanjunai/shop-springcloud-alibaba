@@ -48,5 +48,32 @@ create table if not exists `t_order_item` (
     `t_number` int(11) null default null comment '购买数量'
 ) engine = innodb character set = utf8 collate = utf8_general_ci comment = '订单条目表' row_format = compact;
 
+-- 创建t_idiom成语表，与Idiom实体类对应
+create table if not exists `t_idiom` (
+  `id` bigint(20) unsigned not null primary key comment '主键，数据id',
+  `t_idiom_name` varchar(50) not null comment '成语名称',
+  `t_search_keywords` varchar(16) not null comment '搜索关键字母，成语的每个字拼音首字母组合',
+  `t_create_time` timestamp(0) not null default current_timestamp comment '创建时间',
+  `t_update_time` timestamp(0) not null default current_timestamp on update current_timestamp(0) comment '更新时间',
+  `t_reserve_column01` varchar(255) character set utf8 collate utf8_general_ci null default null comment '预留字段01',
+  `t_reserve_column02` varchar(255) character set utf8 collate utf8_general_ci null default null comment '预留字段02',
+  `t_reserve_column03` varchar(255) character set utf8 collate utf8_general_ci null default null comment '预留字段03',
+  `t_reserve_column04` varchar(255) character set utf8 collate utf8_general_ci null default null comment '预留字段04'
+) engine = innodb character set = utf8 collate = utf8_general_ci comment = '成语表' row_format = compact;
 
-
+-- 创建t_idiom_item成语条目表，与IdiomItem实体类对应
+create table if not exists `t_idiom_item` (
+  `id` bigint(20) unsigned not null primary key comment '主键，数据id',
+  `t_idiom_id` bigint(20) not null comment '成语id',
+  `t_sort` tinyint(1) unsigned not null comment '排序',
+  `t_idiom_words` tinytext not null comment '解说文字',
+  `t_image_url` varchar(1024) not null comment '图片文件url',
+  `t_audio_url` varchar(1024) not null comment '语音文件url',
+  `t_lrc_url` varchar(1024) not null comment '歌词文件url',
+  `t_create_time` timestamp(0) not null default current_timestamp comment '创建时间',
+  `t_update_time` timestamp(0) not null default current_timestamp on update current_timestamp(0) comment '更新时间',
+  `t_reserve_column01` varchar(255) character set utf8 collate utf8_general_ci null default null comment '预留字段01',
+  `t_reserve_column02` varchar(255) character set utf8 collate utf8_general_ci null default null comment '预留字段02',
+  `t_reserve_column03` varchar(255) character set utf8 collate utf8_general_ci null default null comment '预留字段03',
+  `t_reserve_column04` varchar(255) character set utf8 collate utf8_general_ci null default null comment '预留字段04'
+) engine = innodb character set = utf8 collate = utf8_general_ci comment = '成语条目表' row_format = compact;

@@ -3,12 +3,18 @@ package io.binghe.shop.order.controller;
 import com.alibaba.fastjson.JSONObject;
 import io.binghe.shop.dto.OrderParams;
 import io.binghe.shop.order.service.OrderService;
+import io.binghe.shop.order.service.OrderService2;
 import io.binghe.shop.order.service.SentinelService;
+import io.binghe.shop.utils.constants.HttpCode;
+import io.binghe.shop.utils.resp.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -24,6 +30,8 @@ public class OrderController {
     private OrderService orderServiceV5;
 
     private OrderService orderServiceV6;
+
+    private OrderService2 orderService2;
 
     private SentinelService sentinelService;
 
@@ -66,6 +74,11 @@ public class OrderController {
     @Autowired
     public void setSentinelService(SentinelService sentinelService) {
         this.sentinelService = sentinelService;
+    }
+
+    @Autowired
+    public void setOrderService2(OrderService2 orderService2) {
+        this.orderService2 = orderService2;
     }
 
     @GetMapping(value = "/submit_order1")
@@ -130,5 +143,11 @@ public class OrderController {
         return "sentinel2";
     }
 
-
+    @GetMapping(value = "/pages/{pageNum}/{pageSize}")
+    public Result<Map<String, Object>> pages(@PathVariable("pageNum") Integer pageNum, @PathVariable("pageSize") Integer pageSize) {
+        log.info("分页查询传递的参数为: 当前页码:{}, 每页条数:{} ", pageNum, pageSize);
+        Map<String, Object> map = this.orderService2.selectPage(pageNum, pageSize, null);
+        Result<Map<String, Object>> result = new Result<>(HttpCode.SUCCESS, "执行成功", map);
+        return result;
+    }
 }
