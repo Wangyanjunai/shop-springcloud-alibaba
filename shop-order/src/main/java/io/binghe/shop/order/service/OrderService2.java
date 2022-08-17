@@ -2,6 +2,7 @@ package io.binghe.shop.order.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.binghe.shop.bean.Order;
+import io.binghe.shop.vo.PageOrderVO;
 
 import java.util.Map;
 
@@ -18,5 +19,5 @@ public interface OrderService2 {
      * @param pageSize
      * @param queryWrapper
      */
-    Map<String, Object> selectPage(int pageIndex, int pageSize, QueryWrapper<Order> queryWrapper);
+    PageOrderVO selectPage(int pageIndex, int pageSize, QueryWrapper<Order> queryWrapper);
 }

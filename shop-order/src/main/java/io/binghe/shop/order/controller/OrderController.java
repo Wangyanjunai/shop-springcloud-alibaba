@@ -7,6 +7,7 @@ import io.binghe.shop.order.service.OrderService2;
 import io.binghe.shop.order.service.SentinelService;
 import io.binghe.shop.utils.constants.HttpCode;
 import io.binghe.shop.utils.resp.Result;
+import io.binghe.shop.vo.PageOrderVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -144,10 +145,9 @@ public class OrderController {
     }
 
     @GetMapping(value = "/pages/{pageNum}/{pageSize}")
-    public Result<Map<String, Object>> pages(@PathVariable("pageNum") Integer pageNum, @PathVariable("pageSize") Integer pageSize) {
+    public Result<PageOrderVO> pages(@PathVariable("pageNum") Integer pageNum, @PathVariable("pageSize") Integer pageSize) {
         log.info("分页查询传递的参数为: 当前页码:{}, 每页条数:{} ", pageNum, pageSize);
-        Map<String, Object> map = this.orderService2.selectPage(pageNum, pageSize, null);
-        Result<Map<String, Object>> result = new Result<>(HttpCode.SUCCESS, "执行成功", map);
-        return result;
+        PageOrderVO pageOrderVO = this.orderService2.selectPage(pageNum, pageSize, null);
+        return new Result<>(HttpCode.SUCCESS, "执行成功", pageOrderVO);
     }
 }

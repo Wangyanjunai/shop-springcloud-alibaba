@@ -25,6 +25,9 @@ public class OrderItem implements Serializable {
     @TableField(value = "id", fill = FieldFill.INSERT)
     private Long id;
 
+    /**
+     * 订单id
+     */
     @TableField("t_order_id")
     private Long orderId;
 

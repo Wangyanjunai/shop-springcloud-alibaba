@@ -4,15 +4,18 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.binghe.shop.bean.Order;
 import io.binghe.shop.bean.OrderItem;
+import io.binghe.shop.converter.OrderItemToOrderItemVOConverter;
+import io.binghe.shop.converter.OrderToOrderVOConverter;
 import io.binghe.shop.order.mapper.OrderItemMapper;
 import io.binghe.shop.order.mapper.OrderMapper;
 import io.binghe.shop.order.service.OrderService2;
+import io.binghe.shop.vo.OrderVO;
+import io.binghe.shop.vo.PageOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class OrderService2Impl implements OrderService2 {
@@ -31,6 +34,7 @@ public class OrderService2Impl implements OrderService2 {
         this.orderItemMapper = orderItemMapper;
     }
 
+
     /**
      * 分页查询订单
      *
@@ -39,13 +43,25 @@ public class OrderService2Impl implements OrderService2 {
      * @param queryWrapper
      */
     @Override
-    public Map<String, Object> selectPage(int pageIndex, int pageSize, QueryWrapper<Order> queryWrapper) {
+    public PageOrderVO selectPage(int pageIndex, int pageSize, QueryWrapper<Order> queryWrapper) {
         Page<Order> page = new Page<>(pageIndex, pageSize);
-        Map<String, Object> map = new ConcurrentHashMap<>();
         Page<Order> orderPage = this.orderMapper.selectPage(page, queryWrapper);
-        map.put("records", orderPage.getRecords());
-        map.put("total", orderPage.getTotal());
-        map.put("totalPage", orderPage.getPages());
-        return map;
+        List<Order> orderList = orderPage.getRecords();
+        PageOrderVO pageOrderVO = new PageOrderVO();
+        pageOrderVO.setTotal(orderPage.getTotal());
+        pageOrderVO.setTotalPage(orderPage.getPages());
+        List<OrderVO> orderVOList = new ArrayList<>();
+        List<OrderItem> orderItemList;
+        for (Order order : orderList) {
+            OrderVO orderVO = OrderToOrderVOConverter.convert(order);
+            Long orderId = order.getId();
+            QueryWrapper<OrderItem> queryWrapper1 = new QueryWrapper<>();
+            queryWrapper1.eq("t_order_id", orderId);
+            orderItemList = this.orderItemMapper.selectList(queryWrapper1);
+            orderVO.setOrderItemVOList(OrderItemToOrderItemVOConverter.convert(orderItemList));
+            orderVOList.add(orderVO);
+        }
+        pageOrderVO.setOrderVOList(orderVOList);
+        return pageOrderVO;
     }
 }

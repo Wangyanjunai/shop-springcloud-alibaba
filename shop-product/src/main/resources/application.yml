@@ -42,7 +42,6 @@ spring:
       enabled: true
       charset: UTF-8
       force: true
-
   mybatis-plus:
     global-config:
       db-config:
