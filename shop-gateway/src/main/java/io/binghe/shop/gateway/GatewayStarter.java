@@ -1,4 +1,4 @@
-package io.binghe.shop;
+package io.binghe.shop.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

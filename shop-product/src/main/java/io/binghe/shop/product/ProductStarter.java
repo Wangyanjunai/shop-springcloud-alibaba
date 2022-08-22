@@ -1,25 +1,19 @@
-package io.binghe.shop;
+package io.binghe.shop.product;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
-/**
- * @author binghe
- * @version 1.0.0
- * @description 启动用户服的类
- */
 @SpringBootApplication
+@MapperScan(value = { "io.binghe.shop.product.mapper" })
 @EnableTransactionManagement(proxyTargetClass = true)
-@MapperScan(value = {"io.binghe.shop.user.mapper"})
 @EnableDiscoveryClient
-@EnableAsync
-public class UserStarter {
+public class ProductStarter {
+
     public static void main(String[] args) {
-        SpringApplication.run(UserStarter.class, args);
+        SpringApplication.run(ProductStarter.class, args);
     }
+
 }
