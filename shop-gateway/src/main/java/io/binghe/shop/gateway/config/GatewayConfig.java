@@ -1,4 +1,4 @@
-package io.binghe.shop.config;
+package io.binghe.shop.gateway.config;
 
 import com.alibaba.csp.sentinel.adapter.gateway.common.SentinelGatewayConstants;
 import com.alibaba.csp.sentinel.adapter.gateway.common.api.ApiDefinition;
