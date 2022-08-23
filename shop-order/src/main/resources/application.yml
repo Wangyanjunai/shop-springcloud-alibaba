@@ -2,6 +2,10 @@ server:
   port: 8080
   servlet:
     context-path: /order
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
   tomcat:
     threads:
       max: 20
@@ -45,11 +49,6 @@ spring:
         port: 9999 #指定和Sentinel控制台交互的端口，任意指定一个未使用的端口即可
         dashboard: 127.0.0.1:8888 #Sentinel控制台服务地址
       web-context-unify: false
-  http:
-    encoding:
-      enabled: true
-      charset: UTF-8
-      force: true
   mybatis-plus:
     global-config:
       db-config:

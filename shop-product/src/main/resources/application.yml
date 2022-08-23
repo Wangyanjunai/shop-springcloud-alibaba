@@ -2,6 +2,10 @@ server:
   port: 8070
   servlet:
     context-path: /product
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
 spring:
   application:
     name: server-product
@@ -37,11 +41,6 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-  http:
-    encoding:
-      enabled: true
-      charset: UTF-8
-      force: true
   mybatis-plus:
     global-config:
       db-config:
