@@ -40,6 +40,8 @@
         <mybatis.plus.version>3.4.1</mybatis.plus.version>
         <mysql.jdbc.version>8.0.19</mysql.jdbc.version>
         <druid.version>1.1.10</druid.version>
+        <mybatis-plus.version>3.4.1</mybatis-plus.version>
+        <lombok.version>1.18.8</lombok.version>
         <skipTests>true</skipTests>
     </properties>
 

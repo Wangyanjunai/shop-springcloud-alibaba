@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.1</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
 
         <dependency>
@@ -83,7 +83,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
+            <version>${lombok.version}</version>
         </dependency>
 
     </dependencies>
