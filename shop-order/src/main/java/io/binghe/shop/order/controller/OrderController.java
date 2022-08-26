@@ -32,6 +32,8 @@ public class OrderController {
 
     private OrderService orderServiceV6;
 
+    private OrderService orderServiceV7;
+
     private OrderService2 orderService2;
 
     private SentinelService sentinelService;
@@ -70,6 +72,12 @@ public class OrderController {
     @Qualifier("orderServiceV6")
     public void setOrderServiceV6(OrderService orderServiceV6) {
         this.orderServiceV6 = orderServiceV6;
+    }
+
+    @Autowired
+    @Qualifier("orderServiceV7")
+    public void setOrderServiceV7(OrderService orderServiceV7) {
+        this.orderServiceV7 = orderServiceV7;
     }
 
     @Autowired
@@ -121,6 +129,13 @@ public class OrderController {
     public String submitOrder6(OrderParams orderParams) {
         log.info("提交订单时传递的参数:{}", JSONObject.toJSONString(orderParams));
         this.orderServiceV6.saveOrder(orderParams);
+        return "success";
+    }
+
+    @GetMapping(value = "/submit_order7")
+    public String submitOrder7(OrderParams orderParams) {
+        log.info("提交订单时传递的参数:{}", JSONObject.toJSONString(orderParams));
+        this.orderServiceV7.saveOrder(orderParams);
         return "success";
     }
 
