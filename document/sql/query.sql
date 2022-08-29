@@ -17,3 +17,5 @@ truncate table `t_order`;
 truncate table `t_order_item`;
 
 update `t_product` set `t_pro_stock` = 10000 where `id` = 1003;
+
+

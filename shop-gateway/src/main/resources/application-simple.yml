@@ -1,36 +1,36 @@
-server:
-  port: 10001
-spring:
-  application:
-    name: server-gateway
-  cloud:
-    gateway:
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedMethods: "*"
-            allowCredentials: true
-            allowedHeaders: "*"
-      routes:
-        - id: user-gateway
-          uri: http://localhost:8060
-          order: 1
-          predicates:
-            - Path=/server-user/**
-          filters:
-            - StripPrefix=1
-        - id: product-gateway
-          uri: http://localhost:8070
-          order: 1
-          predicates:
-            - Path=/server-product/**
-          filters:
-            - StripPrefix=1
-        - id: order-gateway
-          uri: http://localhost:8080
-          order: 1
-          predicates:
-            - Path=/server-order/**
-          filters:
-            - StripPrefix=1
+#server:
+#  port: 10001
+#spring:
+#  application:
+#    name: server-gateway
+#  cloud:
+#    gateway:
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allowedOrigins: "*"
+#            allowedMethods: "*"
+#            allowCredentials: true
+#            allowedHeaders: "*"
+#      routes:
+#        - id: user-gateway
+#          uri: http://localhost:8060
+#          order: 1
+#          predicates:
+#            - Path=/server-user/**
+#          filters:
+#            - StripPrefix=1
+#        - id: product-gateway
+#          uri: http://localhost:8070
+#          order: 1
+#          predicates:
+#            - Path=/server-product/**
+#          filters:
+#            - StripPrefix=1
+#        - id: order-gateway
+#          uri: http://localhost:8080
+#          order: 1
+#          predicates:
+#            - Path=/server-order/**
+#          filters:
+#            - StripPrefix=1

@@ -1,4 +1,4 @@
-package io.binghe.shop.user.rocketmq.test;
+package io.binghe.shop.rocketmq.test;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;

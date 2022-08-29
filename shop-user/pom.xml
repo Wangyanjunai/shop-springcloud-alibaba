@@ -49,7 +49,6 @@
 			<artifactId>spring-cloud-starter-zipkin</artifactId>
 		</dependency>
 
-		<!--rocketmq依赖-->
 		<dependency>
 			<groupId>org.apache.rocketmq</groupId>
 			<artifactId>rocketmq-spring-boot-starter</artifactId>
@@ -60,6 +59,13 @@
 			<groupId>org.apache.rocketmq</groupId>
 			<artifactId>rocketmq-client</artifactId>
 			<version>4.5.2</version>
+		</dependency>
+
+
+		<!--Nacos配置中心依赖-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 		</dependency>
 	</dependencies>
 
