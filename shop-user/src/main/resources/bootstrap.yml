@@ -8,4 +8,4 @@ spring:
         file-extension: yaml
         group: user_group
   profiles:
-    active: dev
+    active: test
