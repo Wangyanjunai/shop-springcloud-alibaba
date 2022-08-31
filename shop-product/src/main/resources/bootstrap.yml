@@ -1,3 +1,14 @@
+#spring:
+#  application:
+#    name: server-product
+#  cloud:
+#    nacos:
+#      config:
+#        server-addr: 127.0.0.1:8848
+#        file-extension: yaml
+#        group: product_group
+#  profiles:
+#    active: dev
 spring:
   application:
     name: server-product
@@ -7,5 +18,9 @@ spring:
         server-addr: 127.0.0.1:8848
         file-extension: yaml
         group: product_group
+        shared-configs[0]:
+          data_id: server-all.yaml
+          group: all_group
+          refresh: true
   profiles:
     active: dev
