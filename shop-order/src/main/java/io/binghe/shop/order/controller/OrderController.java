@@ -8,6 +8,7 @@ import io.binghe.shop.order.service.SentinelService;
 import io.binghe.shop.utils.constants.HttpCode;
 import io.binghe.shop.utils.resp.Result;
 import io.binghe.shop.vo.PageOrderVO;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,6 +34,8 @@ public class OrderController {
     private OrderService orderServiceV6;
 
     private OrderService orderServiceV7;
+
+    private OrderService orderServiceV8;
 
     private OrderService2 orderService2;
 
@@ -63,21 +66,27 @@ public class OrderController {
     }
 
     @Autowired
-    @Qualifier("orderServiceV5")
+    @Qualifier(value = "orderServiceV5")
     public void setOrderServiceV5(OrderService orderServiceV5) {
         this.orderServiceV5 = orderServiceV5;
     }
 
     @Autowired
-    @Qualifier("orderServiceV6")
+    @Qualifier(value = "orderServiceV6")
     public void setOrderServiceV6(OrderService orderServiceV6) {
         this.orderServiceV6 = orderServiceV6;
     }
 
     @Autowired
-    @Qualifier("orderServiceV7")
+    @Qualifier(value = "orderServiceV7")
     public void setOrderServiceV7(OrderService orderServiceV7) {
         this.orderServiceV7 = orderServiceV7;
+    }
+
+    @Autowired
+    @Qualifier(value = "orderServiceV8")
+    public void setOrderServiceV8(OrderService orderServiceV8) {
+        this.orderServiceV8 = orderServiceV8;
     }
 
     @Autowired
@@ -136,6 +145,14 @@ public class OrderController {
     public String submitOrder7(OrderParams orderParams) {
         log.info("提交订单时传递的参数:{}", JSONObject.toJSONString(orderParams));
         this.orderServiceV7.saveOrder(orderParams);
+        return "success";
+    }
+
+    @GetMapping(value = "/submit_order8")
+    @GlobalTransactional
+    public String submitOrder8(OrderParams orderParams) {
+        log.info("提交订单时传递的参数:{}", JSONObject.toJSONString(orderParams));
+        this.orderServiceV8.saveOrder(orderParams);
         return "success";
     }
 

@@ -9,6 +9,24 @@
 #        group: order_group
 #  profiles:
 #    active: dev
+
+
+#spring:
+#  application:
+#    name: server-order
+#  cloud:
+#    nacos:
+#      config:
+#        server-addr: 127.0.0.1:8848
+#        file-extension: yaml
+#        group: order_group
+#        shared-configs[0]:
+#          data_id: server-all.yaml
+#          group: all_group
+#          refresh: true
+#  profiles:
+#    active: dev
+
 spring:
   application:
     name: server-order
@@ -22,5 +40,31 @@ spring:
           data_id: server-all.yaml
           group: all_group
           refresh: true
+      discovery:
+        server-addr: 127.0.0.1:8848
+    alibaba:
+      seata:
+        tx-service-group: ${spring.application.name}-tx_group
   profiles:
     active: dev
+seata:
+  application-id: ${spring.application.name}
+  service:
+    vgroup-mapping:
+      server-order-tx_group: default
+  registry:
+    nacos:
+      server-addr: ${spring.cloud.nacos.discovery.server-addr}
+      username: nacos
+      password: nacos
+      group: SEATA_GROUP
+      namespace: seata_namespace_001
+      application: seata-server
+  config:
+    type: nacos
+    nacos:
+      server-addr: ${spring.cloud.nacos.discovery.server-addr}
+      username: nacos
+      password: nacos
+      group: SEATA_GROUP
+      namespace: seata_namespace_001
