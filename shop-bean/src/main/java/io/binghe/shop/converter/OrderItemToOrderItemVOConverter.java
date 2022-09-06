@@ -1,9 +1,7 @@
 package io.binghe.shop.converter;
 
-import io.binghe.shop.bean.Order;
 import io.binghe.shop.bean.OrderItem;
 import io.binghe.shop.vo.OrderItemVO;
-import io.binghe.shop.vo.OrderVO;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;

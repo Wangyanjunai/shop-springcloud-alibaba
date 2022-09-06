@@ -1,16 +1,3 @@
--- 创建用户
-create user 'shop'@'%' identified by 'XueGod!@#123';
--- 创建数据库
-create database if not exists shop default character set utf8 default collate utf8_general_ci;
--- 授权mysql5.7
-grant all on shop.* to 'shop'@'%' identified by 'XueGod!@#123';
--- 授权mysql8.1
-grant all privileges on shop.* to 'shop'@'%' with grant option;
-alter user 'shop'@'%' identified with mysql_native_password by 'XueGod!@#123'; #修改加密规则
-alter user 'shop'@'%' identified by 'XueGod!@#123' password expire never; #更新一下用户的密码且不过期
--- 刷新权限
-flush privileges;
-
 -- 创建t_user用户表，与User实体类对应
 create table if not exists `t_user` (
     `id` bigint(20) unsigned not null primary key comment '主键，数据id',

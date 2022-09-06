@@ -1,6 +1,5 @@
 package io.binghe.shop.vo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
