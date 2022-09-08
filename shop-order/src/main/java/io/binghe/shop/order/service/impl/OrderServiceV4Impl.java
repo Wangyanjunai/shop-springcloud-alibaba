@@ -18,8 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Random;
 
 /**
  * @author binghe
